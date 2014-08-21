@@ -1,0 +1,26 @@
+{
+    "map": {
+        "osmUrl": "http://osm.psi.minint.fr/"
+    },
+    "geocoders": [{
+            "name": "Nominatim",
+            "iconColor": "blue",
+            "proxyPhp": "GeocodeNominatimProxy.php",
+            "jsFunction": "geocodeNominatim",
+            "urlGeocoder" : "http://nominatim.openstreetmap.org/search"
+        }, {
+            "name": "Google",
+            "iconColor": "orange",
+            "proxyPhp": "GeocodeGoogleProxy.php",
+            "jsFunction": "geocodeGoogle",
+            "urlGeocoder" : "http://maps.google.com/maps/api/geocode/json",
+            "proxy" : true
+        }
+    ],
+    "proxy" : {
+        "host": "10.xxx.xxx.xxx",
+        "port": "xxxx",        
+        "user": "xxxxxxxx",
+        "pwd": "xxxxxxx"
+    }
+}

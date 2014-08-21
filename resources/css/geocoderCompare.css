@@ -1,0 +1,63 @@
+.popupGeocodeTitle {
+	text-align: center;
+	font-size: 1.3em;
+	margin: 5px;
+	padding: 5px;
+}
+.popupGeocodeSection {
+	background-color: #cccccc;
+	font-weight: bold;
+}
+
+body div.title {
+
+	text-align: center;
+}
+
+input.addr {
+	border: 1px solid blue;
+	width: 300px;
+}
+
+input.cpVille {
+	border: 1px solid blue;
+	width: 300px;
+}
+
+.starter-template {
+	margin-top: 60px;
+}
+
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #eee;
+}
+
+.form-geocode {
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-geocode .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.code-postal {
+	width: 400px;
+}
+
+.form-geocode .form-btn-action {
+	margin: 5px;
+}
+
+.my-div-icon {
+	background-color:red;
+	text-align:center;
+}
