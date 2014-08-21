@@ -1,6 +1,6 @@
 #GeocodeComp
 
-## Comparing different kind of geocoding services
+## A gecoding comparison tool...
 
 ## Usage
 
