@@ -4,7 +4,7 @@
 
 ## Usage
 
-First you have to
+First you have to create the config file /conf/conf.json (you can use sample --> conf.sample.json)
 
 ## Exemple
 
