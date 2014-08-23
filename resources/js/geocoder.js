@@ -155,7 +155,6 @@ function geocodePhoton(jsonParams) {
 	}
 
 	var geocodeItem = datas.features[0];
-	// récupérer le premier élément
 
 	var lon = geocodeItem.geometry.coordinates[0];
 	var lat = geocodeItem.geometry.coordinates[1];
