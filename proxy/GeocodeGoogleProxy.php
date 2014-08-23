@@ -40,14 +40,16 @@ function getCurl($uri, $host, $port, $user, $pwd) {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_URL, $uri);
     
-        // Activation de l'utilisation d'un serveur proxy
-        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
+        if ($sParamProxy) {
+            // Activation de l'utilisation d'un serveur proxy
+            curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
     
-        // Définition de l'adresse du proxy
-        curl_setopt($ch, CURLOPT_PROXY, $host.":".$port);
+            // Définition de l'adresse du proxy
+            curl_setopt($ch, CURLOPT_PROXY, $host.":".$port);
     
-        // Définition des identifiants si le proxy requiert une identification
-        curl_setopt($ch, CURLOPT_PROXYUSERPWD, $user.":".$pwd);
+            // Définition des identifiants si le proxy requiert une identification
+            curl_setopt($ch, CURLOPT_PROXYUSERPWD, $user.":".$pwd);
+        }
     
         $content = curl_exec($ch);
         
