@@ -135,6 +135,63 @@ function geocodeNominatim(jsonParams) {
 			});
 }
 
+function geocodePhoton(jsonParams) {
+	var addr = $("#adresse").val();
+	var cpVille = $("#cpVille").val();
+	var params = {
+		'addr' : addr,
+		'cpVille' : cpVille,
+		'env' : jsonParams.env,
+		'urlGeocoder' : jsonParams.urlGeocoder
+	};
+
+	$.getJSON('proxy/' + jsonParams.proxyPhp, params, function(datas) {
+
+				if (datas.length == 0) {
+					alert("Pas de géocodage possible");
+					return 0;
+				}
+
+				var geocodeItem = datas[0];
+				// récupérer le premier élément
+
+				var lon = geocodeItem.lon;
+				var lat = geocodeItem.lat;
+				
+				// var myIcon = L.divIcon({iconSize:L.point(50, 50), className: 'my-div-icon', html: '<b>Nomin</b>'});
+				marker = L.circle([lat, lon], 10,  { color: jsonParams.iconColor}).addTo(map);
+				marker = L.marker([lat, lon],{icon: L.AwesomeMarkers.icon({icon:'map-marker',markerColor:jsonParams.iconColor})}).addTo(map);
+				// marker = L.marker([lat, lon],{icon: myIcon}).addTo(map);
+				// marker = L.circle([lat, lon], 5,  { color: 'red'}).addTo(map);
+				
+				popupText = "<div class='popupGeocodeTitle'>" + jsonParams.name + "</div>"
+						+ "type="
+						+ geocodeItem.type
+						+ "<br/>"
+						+ "importance="
+						+ geocodeItem.importance
+						+ "<br/>"
+						+ "osm_type="
+						+ geocodeItem.osm_type
+						+ "<br/>"
+						+ "osm_id="
+						+ geocodeItem.osm_id
+
+				marker.bindPopup(popupText).openPopup();
+				
+				map.setView([lat, lon]);
+
+				var southWest = L.latLng(geocodeItem.boundingbox[0],
+						geocodeItem.boundingbox[2]);
+				var northEast = L.latLng(geocodeItem.boundingbox[1],
+						geocodeItem.boundingbox[3]);
+				var bounds = L.latLngBounds(southWest, northEast);
+				var myLayer = L.geoJson().addTo(map);
+
+				map.fitBounds(bounds);
+			});
+}
+
 function geocodeSocleRest(jsonParams) {
 	var addr = $("#adresse").val();
 	var cpVille = $("#cpVille").val();
