@@ -4,6 +4,7 @@
     define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 
     require_once(APPLICATION_PATH . '/libs/geocoder.php');
+    require_once(APPLICATION_PATH . '/libs/proxy.php');
 
     try {
         

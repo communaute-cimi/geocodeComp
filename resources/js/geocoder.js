@@ -24,12 +24,11 @@ function geocodeGoogle(jsonParams) {
     var cpVille = $("#cpVille").val();
 
     try {
-	jsonParams.addr = addr;
-	jsonParams.cpVille = cpVille;
+		jsonParams.addr = addr;
+		jsonParams.cpVille = cpVille;
     }catch(message) {
-	alert(ex.message);
-	console.log(ex);
-	return 0;
+		alert(ex.message);
+		return 0;
     }
     
     
@@ -89,7 +88,7 @@ function geocodeNominatim(jsonParams) {
 	'urlGeocoder' : jsonParams.urlGeocoder
     };
 
-    $.getJSON('proxy/' + jsonParams.proxyPhp, params, function(datas) {
+    $.getJSON('proxy/' + jsonParams.proxyPhp, jsonParams, function(datas) {
 
 	if (datas.length == 0) {
 	    alert("Pas de géocodage possible");
@@ -135,19 +134,28 @@ function geocodeNominatim(jsonParams) {
 	map.fitBounds(bounds);
     });
 }
+/**
+ * Invoke and display geocode pin
+ * For Photon geocoder
+ * 
+ * @param {} jsonParams
+ * 
+ */
 
 function geocodePhoton(jsonParams) {
     
     var addr = $("#adresse").val();
     var cpVille = $("#cpVille").val();
-    var params = {
-	'addr' : addr,
-	'cpVille' : cpVille,
-	'env' : jsonParams.env,
-	'urlGeocoder' : jsonParams.urlGeocoder
-    };
+    
+    try {
+		jsonParams.addr = addr;
+		jsonParams.cpVille = cpVille;
+    }catch(message) {
+		alert(ex.message);
+		return 0;
+    }
 
-    $.getJSON('proxy/' + jsonParams.proxyPhp, params, function(datas) {
+    $.getJSON('proxy/' + jsonParams.proxyPhp, jsonParams, function(datas) {
 
 	if (datas.length == 0) {
 	    alert("Pas de géocodage possible");
@@ -164,6 +172,9 @@ function geocodePhoton(jsonParams) {
 	marker = L.marker([lat, lon],{icon: L.AwesomeMarkers.icon({icon:'map-marker',markerColor:jsonParams.iconColor})}).addTo(map);
 	// marker = L.marker([lat, lon],{icon: myIcon}).addTo(map);
 	// marker = L.circle([lat, lon], 5,  { color: 'red'}).addTo(map);
+	
+	// Response looks like
+	// {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"osm_id": 333146, "postcode": "91580", "name": "\u00c9tr\u00e9chy", "country": "France", "osm_value": "administrative", "osm_key": "boundary"}, "geometry": {"type": "Point", "coordinates": [2.1909175, 48.4930895]}}]}
 	
 	popupText = "<div class='popupGeocodeTitle'>" + jsonParams.name + "</div>"
 	    + "type="
@@ -200,7 +211,7 @@ function geocodeSocleRest(jsonParams) {
 	'urlGeocoder' : jsonParams.urlGeocoder
     };
 
-    $.getJSON('proxy/' + jsonParams.proxyPhp, params, function(datas) {
+    $.getJSON('proxy/' + jsonParams.proxyPhp, jsonParams, function(datas) {
 
 	var address = datas.candidates[0];
 
@@ -268,7 +279,7 @@ function geocodeJDONREF(jsonParams) {
 
     console.log(jsonParams);
     
-    $.getJSON('proxy/' + jsonParams.proxyPhp, params, function(datas) {
+    $.getJSON('proxy/' + jsonParams.proxyPhp, jsonParams, function(datas) {
 	if (datas.error === 1) {
 	    alert("Pas de géocodage possible, message : \"" + datas.message
 		  + "\"");

@@ -16,7 +16,7 @@ try {
     $uri = $sParamUrl . '?' . http_build_query($aGeocodeParams);
 
     if($sParamProxy == true) {
-        $jsonResponse = getCurl($uri, $oJsonConf['proxy']['host'], $oJsonConf['proxy']['port'], $oJsonConf['proxy']['user'], $oJsonConf['proxy']['pwd']);
+        $jsonResponse = RequestProxy::getCurl($uri, $oJsonConf['proxy']['host'], $oJsonConf['proxy']['port'], $oJsonConf['proxy']['user'], $oJsonConf['proxy']['pwd']);
     }else {
         $jsonResponse = file_get_contents($uri);
     }
@@ -31,31 +31,4 @@ try {
 
 } catch(Exception $ex) {
     echo json_encode(array('error' => 1, 'message' => $ex -> getMessage()));
-}
-
-function getCurl($uri, $host, $port, $user, $pwd) {
-    try {
-        $ch = curl_init();
-    
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_URL, $uri);
-    
-        if ($sParamProxy) {
-            // Activation de l'utilisation d'un serveur proxy
-            curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
-    
-            // Définition de l'adresse du proxy
-            curl_setopt($ch, CURLOPT_PROXY, $host.":".$port);
-    
-            // Définition des identifiants si le proxy requiert une identification
-            curl_setopt($ch, CURLOPT_PROXYUSERPWD, $user.":".$pwd);
-        }
-    
-        $content = curl_exec($ch);
-        
-        return $content;
-    }catch(Exception $ex) {
-        throw $ex;
-    }
-
 }
