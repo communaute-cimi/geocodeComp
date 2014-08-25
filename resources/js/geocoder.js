@@ -124,7 +124,7 @@ function geocodeNominatim(jsonParams) {
  */
 
 function geocodePhoton(jsonParams) {
-    
+	var dtStart = $.now();    
     var addr = $("#adresse").val();
     var cpVille = $("#cpVille").val();
     
@@ -148,15 +148,15 @@ function geocodePhoton(jsonParams) {
 		// Response looks like
 		// {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"osm_id": 333146, "postcode": "91580", "name": "\u00c9tr\u00e9chy", "country": "France", "osm_value": "administrative", "osm_key": "boundary"}, "geometry": {"type": "Point", "coordinates": [2.1909175, 48.4930895]}}]}
 		
+		var timelaps = ($.now() - dtStart) /3600;
+		
 		popupText = "<div class='popupGeocodeTitle'>" + jsonParams.name + "</div>"
 		    + "type="
 		    + geocodeItem.type
 		    + "<br/>"
-		    + "osm_value="
-		    + geocodeItem.properties.osm_value
-		    + "<br/>"
-		    + "osm_id="
-		    + geocodeItem.properties.osm_id
+		    + "osm_value=" + geocodeItem.properties.osm_value + "<br/>" 
+		    + "osm_id=" + geocodeItem.properties.osm_id
+		    + "temps=" + timelaps.toString().substr(0,5) + "<br/>"   
 	
 		marker.bindPopup(popupText).openPopup();
 		
@@ -218,8 +218,15 @@ function geocodeSocleRest(jsonParams) {
     });
 }
 
-function geocodeJDONREF(jsonParams) {
+/**
+ * 
+ * 
+ * @param {} jsonParams
+ */
 
+function geocodeJDONREF(jsonParams) {
+	var dtStart = $.now();
+    
     var typesGeocode = {
 		1: "Plaque",
 		2: "Interpolation à la plaque",
@@ -252,7 +259,7 @@ function geocodeJDONREF(jsonParams) {
 		    valide_score = "<b>Scores</b> : " + datas.valide_scores + "<br />";
 		}
 		
-		
+		var timelaps = ($.now() - dtStart) /3600;
 		
 		popupText = "<div class='popupGeocodeTitle'>"+ jsonParams.name + "</div>"
 		    + "<div class='popupGeocodeSection'>Validation</div>"
@@ -272,15 +279,18 @@ function geocodeJDONREF(jsonParams) {
 		    + "<div style='background-color:#cccccc;font-weight:bold;'>Géocodage</div>"
 		    + "<b>type</b>=" + typesGeocode[datas.geocode.propositions.type] + " ["  + datas.geocode.propositions.type + "]<br/>"
 		    + "projection=" + datas.geocode.propositions.projection + "<br/>" 
-		    + "service=" + datas.geocode.propositions.service
+		    + "service=" + datas.geocode.propositions.service + "<br/>" 
+		    + "temps=" + timelaps.toString().substr(0,5) + "<br/>" 
 	
 		marker.bindPopup(popupText).openPopup();
 	
 		map.setView([lat, lon], 15);
-
     });
 }
 
+/*
+ * Verify datas (after AJAX call) stop script in 2 cases
+ */
 function checkGeocodeDatas(datas) {
 	if (datas.length == 0) {
 	    alert("Aucune réponse (datas.length==0)");

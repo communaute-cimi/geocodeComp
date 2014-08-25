@@ -12,7 +12,6 @@
         
         if(! file_exists(APPLICATION_PATH . '/conf/conf.json')) throw new Exception("Le fichier de configuration est absent --> /conf/conf.json", 1);
         
-        
         $sJsonConf = file_get_contents(APPLICATION_PATH . '/conf/conf.json'); 
         $oJsonConf = json_decode($sJsonConf, true);
         
