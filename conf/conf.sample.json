@@ -16,13 +16,19 @@
         "urlGeocoder" : "http://maps.google.com/maps/api/geocode/json",
         "proxy" : true
     }, {
-	"name": "Photon (BANO)",
-	"iconColor": "green",
-	"proxyPhp": "GeocodePhotonProxy.php",
-	"jsFunction": "geocodePhoton",
-	"urlGeocoder":"http://france.photon.fluv.io/api/",
-	"proxy" : false
-    }
+        "name": "Photon (BANO)",
+        "iconColor": "green",
+        "proxyPhp": "GeocodePhotonProxy.php",
+        "jsFunction": "geocodePhoton",
+        "urlGeocoder":"http://france.photon.fluv.io/api/",
+        "proxy" : false
+    }, {
+        "name": "IdeesLibres.org (BANO)",
+        "iconColor": "black",
+        "proxyPhp": "GeocodeIdeesLibresProxy.php",
+        "jsFunction": "geocodeIdeesLibres",
+        "urlGeocoder":"http://www.ideeslibres.org/Bano/q2.php"
+       }
     ],
     "proxy" : {
         "host": "10.xxx.xxx.xxx",
