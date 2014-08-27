@@ -205,7 +205,7 @@ function geocodePhoton(jsonParams) {
         + geocodeItem.type
         + "<br/>"
         + "osm_value=" + geocodeItem.properties.osm_value + "<br/>" 
-        + "osm_id=" + geocodeItem.properties.osm_id
+        + "osm_id=" + geocodeItem.properties.osm_id + "<br/>"
         + "temps=" + timelaps.toString().substr(0,5) + "<br/>"   
   
     marker.bindPopup(popupText).openPopup();
